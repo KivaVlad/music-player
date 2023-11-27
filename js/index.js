@@ -67,8 +67,8 @@ function updateProgress(e) {
     const prograssPercent = Math.ceil((currentTime / duration) * 100);
 
     if (prograssPercent > 0) progress.value = prograssPercent;
-    currentSongTime.innerHTML = formattedSeconds(currentTime) || '00:00';
-    totalSongTime.innerHTML = formattedSeconds(duration) || '00:00';
+    currentTime > 0 ? currentSongTime.innerHTML = formattedSeconds(currentTime) : currentSongTime.innerHTML = '00:00';
+    currentTime > 0 ? totalSongTime.innerHTML = formattedSeconds(duration) : totalSongTime.innerHTML = '00:00';
 }
 
 // Set Progress
