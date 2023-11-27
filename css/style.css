@@ -1,0 +1,253 @@
+/* Reset and base styles  */
+* {
+    box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Links */
+
+a, a:link, a:visited  {
+    text-decoration: none;
+}
+
+a:hover  {
+    text-decoration: none;
+}
+
+/* Common */
+
+aside, nav, footer, header, section, main {
+	display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: inherit;
+	font-weight: inherit;
+}
+
+ul, ul li {
+	list-style: none;
+}
+
+img {
+	vertical-align: top;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+/* Form */
+input, textarea, button, select {
+	font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  --moz-appearance: textfield;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button, input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active, 
+textarea:active, textarea:focus,
+select:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+label {
+	cursor: pointer;
+}
+
+legend {
+	display: block;
+}
+/* End Reset and base styles */
+
+:root {
+    --light-gray: rgb(232, 231, 231);
+    --bg-color: #5F8671;
+    --nero: #292627;
+    --light-yellow: #CDA460;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.player_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.albom_img {
+    width: 250px;
+    height: 250px;
+    border-radius: 8px;
+}
+
+.audio_info_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.audio_name {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--light-gray);
+}
+
+.audio_author {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--light-gray);
+}
+
+.player_options {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 100px;
+}
+  
+.player__current-time {
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--light-gray);
+}
+  
+.player__seek-slider-value {
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background-color: var(--light-gray);
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.player__seek-slider-value:hover {
+    height: 6px;
+}
+  
+.player__seek-slider-value::-webkit-slider-thumb {
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    background: var(--light-yellow);
+    border-radius: 50%;
+    cursor: pointer;
+}
+  
+.player__seek-slider-value::-moz-range-thumb {
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    background: var(--light-yellow);
+    border-radius: 50%;
+    cursor: pointer;
+}
+  
+.player__total-time {
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--light-gray);
+}
+
+.player_nav_keys_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.player_nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.player_nav > img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.play-pause_wrapper {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.player_nav > img:active, .play-pause_wrapper:active {
+    transform: scale(0.92);
+}
+
+.player_left_nav, .player_right_nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.player_left_nav > img, .player_right_nav > img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
