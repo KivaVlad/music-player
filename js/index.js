@@ -220,11 +220,12 @@ function initPlaylist() {
     // При клике на поле получаем индекс выбранной песни
     playlistItems.forEach((item) => item.addEventListener('click', () => {
         const currentAudioTitle = item.innerText;
-        const currentAudioIndex = playlist.findIndex((song) => song.full_name === currentAudioTitle);
-        currentSong = currentAudioIndex;
+        const currentAudioIndex = playlist.find((song) => song.full_name === currentAudioTitle);
+        console.log(currentAudioIndex);
+        // currentSong = currentAudioIndex;
         
         if (isPlaying === true) {
-            loadSong(playlist[currentSong]);
+            loadSong(currentAudioIndex);
             playAudio();
         }
 
