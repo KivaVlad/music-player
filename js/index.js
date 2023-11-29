@@ -29,9 +29,12 @@ const playlist = [
     {author: 'Linkin Park', name: 'Breaking the Habit', full_name: 'Linkin Park - Breaking the Habit'},
     {author: 'Linkin Park', name: 'Faint', full_name: 'Linkin Park - Faint'},
     {author: 'Linkin Park', name: 'In the End', full_name: 'Linkin Park - In the End'},
+    {author: 'Linkin Park', name: 'Lost', full_name: 'Linkin Park - Lost'},
     {author: 'Linkin Park', name: 'Numb', full_name: 'Linkin Park - Numb'},
     {author: 'Linkin Park', name: 'One Step Closer', full_name: 'Linkin Park - One Step Closer'},
+    {author: 'Linkin Park', name: 'Papercut', full_name: 'Linkin Park - Papercut'},
     {author: 'Linkin Park', name: 'With You', full_name: 'Linkin Park - With You'},
+    {author: 'Linkin Park', name: 'X-Ecutioner Style', full_name: 'Linkin Park - X-Ecutioner Style'},
 ]
 
 // Загружаем выбранную песню
