@@ -260,9 +260,9 @@ body {
     align-items: center;
     position: absolute;
     gap: 10px;
-    top: 30px;
-    left: -60px;
-    padding: 4px 8px;
+    top: 24px;
+    left: -80px;
+    padding: 8px 12px;
     border-radius: 10px;
     background-color: var(--nero);
 }
@@ -361,6 +361,10 @@ body {
     .playlist_item__icon_wrapper {
         width: 30px;
         height: 30px;
+    }
+
+    .volume_icons_container {
+        display: none;
     }
 }
 

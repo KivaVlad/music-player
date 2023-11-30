@@ -17,6 +17,9 @@ const openPlaylistButton = document.getElementById('open-playlist');
 const closePlaylistButton = document.getElementById('close-playlist');
 const volumeOnButton = document.getElementById('volume-on');
 const volumeOffButton = document.getElementById('volume-off');
+const volumeControl = document.querySelector('.volume_control_container');
+const volumeProgress = document.querySelector('.volume_input');
+const volumeValue = document.querySelector('.volume_value');
 
 let isPlaying = false;
 let isPaused = true;
@@ -48,8 +51,6 @@ loadSong(playlist[currentSong]);
 
 // Play
 function playAudio() {
-    isPlaying = true;
-    isPaused = false;
     player.play();
     playButton.classList.add('hidden');
     pauseButton.classList.remove('hidden');
@@ -57,8 +58,6 @@ function playAudio() {
 
 // Pause
 function pauseAudio() {
-    isPlaying = false;
-    isPaused = true;
     player.pause();
     playButton.classList.remove('hidden')
     pauseButton.classList.add('hidden');
@@ -206,41 +205,26 @@ function initPlaylist() {
             <div class="playlist_item">
                 <h4 class="song_title">${playlist[i].full_name}</h4>
                 <div class="playlist_item__icon_wrapper">
-                    <img src="./assets/icons/white-play.png" id="play-icon" alt="" />
+                    <img src="./assets/icons/white-play.png" data-id="${i}" id="play-icon" alt="" />
                     <img src="./assets/icons/write-pause.png" id="pause-icon" alt="" />
                 </div>
             </div>
         `
     }
     
-    const playlistItems = document.querySelectorAll('.playlist_item');
     const playIcons = document.querySelectorAll('#play-icon');
     const pauseIcons = document.querySelectorAll('#pause-icon');
 
-    // При клике на поле получаем индекс выбранной песни
-    playlistItems.forEach((item) => item.addEventListener('click', () => {
-        const currentAudioTitle = item.innerText;
-        const currentAudioIndex = playlist.find((song) => song.full_name === currentAudioTitle);
-        console.log(currentAudioIndex);
-        // currentSong = currentAudioIndex;
-        
-        if (isPlaying === true) {
-            loadSong(currentAudioIndex);
-            playAudio();
-        }
-
-        if (isPaused === true) {
-            pauseAudio();
-        }
-    }))
-
-    // При клике на play
-    playIcons.forEach((icon) => icon.addEventListener('click', () => {
+    // При клике на play получаем id выбранного элемента
+    playIcons.forEach((icon) => icon.addEventListener('click', (e) => {
         playIcons.forEach((icon) => icon.classList.remove('hidden'));
         icon.classList.add('hidden');
         pauseIcons.forEach((icon) => icon.classList.remove('hidden'));
-        isPlaying = true;
-        isPaused = false;
+
+        const { id } = e.target.dataset;
+        currentSong = id;
+        loadSong(playlist[currentSong]);
+        playAudio();
     }))
 
     // При клике на pause
@@ -248,8 +232,8 @@ function initPlaylist() {
         pauseIcons.forEach((icon) => icon.classList.remove('hidden'));
         icon.classList.add('hidden');
         playIcons.forEach((icon) => icon.classList.remove('hidden'));
-        isPlaying = false;
-        isPaused = true;
+
+        pauseAudio();
     }))
 }
 
@@ -259,6 +243,11 @@ initPlaylist();
 function volumeOff() {
     volumeOnButton.classList.add('hidden');
     volumeOffButton.classList.remove('hidden');
+
+    volumeProgress.value = 0;
+    volumeProgress.min = 0;
+    player.volume = 0;
+    volumeValue.innerHTML = `0%`;
 }
 
 // Включить звук
@@ -267,6 +256,28 @@ function volumeOn() {
     volumeOffButton.classList.add('hidden');
 }
 
+// Показать контейнер с регулировкой громкости
+function visibleVolume() {
+    volumeControl.style.display = 'flex';
+}
+
+// Скрыть контейнер с регулировкой громкости
+function hiddenVolume() {
+    volumeControl.style.display = 'none';
+}
+
+// Настройка звука
+function setVolume() {
+    const value = volumeProgress.value;
+    player.volume = value / 100;
+    volumeValue.innerHTML = `${value}%`;
+
+    if (+value === 0) {
+        volumeOff();
+    } else {
+        volumeOn();
+    }
+}
 
 playButton.addEventListener('click', playAudio);
 pauseButton.addEventListener('click', pauseAudio);
@@ -283,3 +294,6 @@ openPlaylistButton.addEventListener('click', openPlaylist);
 closePlaylistButton.addEventListener('click', closePlaylist);
 volumeOnButton.addEventListener('click', volumeOff);
 volumeOffButton.addEventListener('click', volumeOn);
+document.querySelector('.volume_icons_container').addEventListener('mouseover', visibleVolume);
+document.querySelector('.volume_icons_container').addEventListener('mouseout', hiddenVolume);
+volumeProgress.addEventListener('click', setVolume);
