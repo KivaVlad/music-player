@@ -25,7 +25,7 @@ let isPlaying = false;
 let isPaused = true;
 let isRandom = false;
 let isRepeat = false;
-let currentSong = 0;
+let currentSongIndex = 0;
 
 const playlist = [
     {author: 'Linkin Park', name: 'A Place for My Head', full_name: 'Linkin Park - A Place for My Head'},
@@ -40,18 +40,26 @@ const playlist = [
     {author: 'Linkin Park', name: 'X-Ecutioner Style', full_name: 'Linkin Park - X-Ecutioner Style'},
 ]
 
+const wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: '#4F4A85',
+    progressColor: '#383351',
+})
+
 // Загружаем выбранную песню
 function loadSong(song) {
     songAuthor.innerHTML = song.author;
     songName.innerHTML = song.name;
     player.src = `./audio/${song.full_name}.mp3`;
+    wavesurfer.load(`./audio/${playlist[currentSongIndex].full_name}.mp3`);
 }
 
-loadSong(playlist[currentSong]);
+loadSong(playlist[currentSongIndex]);
 
 // Play
 function playAudio() {
     player.play();
+    wavesurfer.play();
     playButton.classList.add('hidden');
     pauseButton.classList.remove('hidden');
 }
@@ -59,6 +67,7 @@ function playAudio() {
 // Pause
 function pauseAudio() {
     player.pause();
+    wavesurfer.pause();
     playButton.classList.remove('hidden')
     pauseButton.classList.add('hidden');
 }
@@ -66,43 +75,41 @@ function pauseAudio() {
 // Следующая песня
 function nextAudio() {
     if (isRepeat === true) {
-        currentSong = currentSong;  
+        currentSongIndex = currentSongIndex;  
     } else {
         if (isRandom === true) {
-            currentSong = Math.ceil(Math.random() * playlist.length);
+            currentSongIndex = Math.ceil(Math.random() * playlist.length);
         } else {
-            currentSong++
+            currentSongIndex++
         }
     }
     
-    if (currentSong === playlist.length) {
-        currentSong = 0;
+    if (currentSongIndex === playlist.length) {
+        currentSongIndex = 0;
     }
 
-    loadSong(playlist[currentSong]);
+    loadSong(playlist[currentSongIndex]);
     pauseAudio();
-    playAudio();
 }
 
 // Предыдущая песня
 function prevAudio() {
-    if (currentSong === 0) { 
-        currentSong = playlist.length;
+    if (currentSongIndex === 0) { 
+        currentSongIndex = playlist.length;
     }
 
     if (isRepeat === true) {
-        currentSong = currentSong;  
+        currentSongIndex = currentSongIndex;  
     } else {
         if (isRandom === true) {
-            currentSong = Math.ceil(Math.random() * playlist.length);
+            currentSongIndex = Math.ceil(Math.random() * playlist.length);
         } else {
-            currentSong--
+            currentSongIndex--
         }
     }
 
-    loadSong(playlist[currentSong]);
+    loadSong(playlist[currentSongIndex]);
     pauseAudio();
-    playAudio();
 }
 
 // Progress bar
@@ -124,6 +131,7 @@ function setProgress(e) {
     const clickX = e.offsetX;
     const duration = player.duration;
     player.currentTime = (clickX / width) * duration;
+    wavesurfer.currentTime = (clickX / width) * duration;
 }
 
 // Переводим время 
@@ -222,8 +230,8 @@ function initPlaylist() {
         pauseIcons.forEach((icon) => icon.classList.remove('hidden'));
 
         const { id } = e.target.dataset;
-        currentSong = id;
-        loadSong(playlist[currentSong]);
+        currentSongIndex = id;
+        loadSong(playlist[currentSongIndex]);
         playAudio();
     }))
 
@@ -297,3 +305,4 @@ volumeOffButton.addEventListener('click', volumeOn);
 document.querySelector('.volume_icons_container').addEventListener('mouseover', visibleVolume);
 document.querySelector('.volume_icons_container').addEventListener('mouseout', hiddenVolume);
 volumeProgress.addEventListener('click', setVolume);
+wavesurfer.on('interaction', playAudio);

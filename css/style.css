@@ -91,14 +91,6 @@ button::-moz-focus-inner {
 	padding: 0;
 	border: 0;
 }
-
-label {
-	cursor: pointer;
-}
-
-legend {
-	display: block;
-}
 /* End Reset and base styles */
 
 :root {
@@ -116,14 +108,19 @@ body {
     overflow: hidden;
 }
 
+.hidden {
+    display: none;
+}
+
 .container {
-    max-width: 400px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
 
-.hidden {
-    display: none;
+.player {
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .player_container {
@@ -343,6 +340,11 @@ body {
     height: 40px;
     cursor: pointer;
     overflow: hidden;
+}
+
+#waveform {
+    margin-top: 40px;
+    width: 100%;
 }
 
 @media screen and (max-width: 650px) {
