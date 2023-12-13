@@ -21,8 +21,6 @@ const volumeControl = document.querySelector('.volume_control_container');
 const volumeProgress = document.querySelector('.volume_input');
 const volumeValue = document.querySelector('.volume_value');
 
-let isPlaying = false;
-let isPaused = true;
 let isRandom = false;
 let isRepeat = false;
 let currentSongIndex = 0;
@@ -40,18 +38,11 @@ const playlist = [
     {author: 'Linkin Park', name: 'X-Ecutioner Style', full_name: 'Linkin Park - X-Ecutioner Style'},
 ]
 
-const wavesurfer = WaveSurfer.create({
-    container: '#waveform',
-    waveColor: '#4F4A85',
-    progressColor: '#383351',
-})
-
 // Загружаем выбранную песню
 function loadSong(song) {
     songAuthor.innerHTML = song.author;
     songName.innerHTML = song.name;
     player.src = `./audio/${song.full_name}.mp3`;
-    wavesurfer.load(`./audio/${playlist[currentSongIndex].full_name}.mp3`);
 }
 
 loadSong(playlist[currentSongIndex]);
@@ -59,7 +50,6 @@ loadSong(playlist[currentSongIndex]);
 // Play
 function playAudio() {
     player.play();
-    wavesurfer.play();
     playButton.classList.add('hidden');
     pauseButton.classList.remove('hidden');
 }
@@ -67,7 +57,6 @@ function playAudio() {
 // Pause
 function pauseAudio() {
     player.pause();
-    wavesurfer.pause();
     playButton.classList.remove('hidden')
     pauseButton.classList.add('hidden');
 }
@@ -90,6 +79,7 @@ function nextAudio() {
 
     loadSong(playlist[currentSongIndex]);
     pauseAudio();
+    playAudio();
 }
 
 // Предыдущая песня
@@ -110,6 +100,7 @@ function prevAudio() {
 
     loadSong(playlist[currentSongIndex]);
     pauseAudio();
+    playAudio();
 }
 
 // Progress bar
@@ -131,7 +122,6 @@ function setProgress(e) {
     const clickX = e.offsetX;
     const duration = player.duration;
     player.currentTime = (clickX / width) * duration;
-    wavesurfer.currentTime = (clickX / width) * duration;
 }
 
 // Переводим время 
@@ -305,4 +295,3 @@ volumeOffButton.addEventListener('click', volumeOn);
 document.querySelector('.volume_icons_container').addEventListener('mouseover', visibleVolume);
 document.querySelector('.volume_icons_container').addEventListener('mouseout', hiddenVolume);
 volumeProgress.addEventListener('click', setVolume);
-wavesurfer.on('interaction', playAudio);

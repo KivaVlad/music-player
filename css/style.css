@@ -342,11 +342,6 @@ body {
     overflow: hidden;
 }
 
-#waveform {
-    margin-top: 40px;
-    width: 100%;
-}
-
 @media screen and (max-width: 650px) {
     .playlist_header {
         margin-right: 0;
