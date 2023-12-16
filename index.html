@@ -4,71 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css" />
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
     <title>Music player</title>
 </head>
 <body>
     <div class="container">
-        <div class="player">
-            <div class="player_container">
 
-                <div class="albom_img">
+        <div class="player">
+
+            <div class="player-nav_icons">
+                <div class="player-nav__play-pause__container">
+                    <img src="./assets/icons/play.png" alt="play" id="play" data-set="parent" />
+                    <img src="./assets/icons/pause.png" alt="pause" id="pause" />
+                </div>
+                <img src="./assets/icons/prev.png" alt="prev" id="prev" />
+                <img src="./assets/icons/next.png" alt="prev" id="next" />
+            </div>
+
+            <div class="player-song__container">
+                <div class="player-song__image">
                     <img src="./assets/images/Linkin_Park_Hybrid_Theory_Album_Cover.jpg" alt="" />
-                    <div class="audio_info_container">
-                        <h2 class="audio_name"></h2>
-                        <h4 class="audio_author"></h4>
-                    </div>
                 </div>
-    
-                <div class="player_nav">
-                    <img src="./assets/icons/prev-icon.png" id="prev" alt="" />
-                    <div class="play-pause_wrapper">
-                        <img src="./assets/icons/play-icon.png" id="play" alt="" />
-                        <img src="./assets/icons/pause-icon.png" id="pause" class="hidden" alt="" />
-                    </div>
-                    <img src="./assets/icons/next-icon.png" id="next" alt="" />
-                </div>
-    
-                <div class="player_options">
-                    <span class="player__current-time">00:00</span>
-                    <input type="range" min="1" max="100" value="0" class="progress__bar" />
-                    <div class="player__total-time">00:00</div>
-                </div>
-    
-                <div class="player_nav_keys_container">
-                    <img id="open-playlist" src="./assets/icons/playlist-icon.png" alt="" />
-                    <div class="random_icon_container">
-                        <img src="./assets/icons/random-icon.png" id="random" alt="" />
-                        <img src="./assets/icons/random-icon-active.png" id="random-active" class="hidden" alt="" />
-                    </div>
-                    <div class="repeat_icon_container">
-                        <img src="./assets/icons/repeat-icon.png" id="repeat" alt="" />
-                        <img src="./assets/icons/repeat-icon-active.png" id="repeat-active" class="hidden" alt="" />
-                    </div>
-                    <div class="volume_icons_container">
-                        <img src="./assets/icons/volume-icon.png" id="volume-on" alt="" />
-                        <img src="./assets/icons/volume-off.png" id="volume-off" class="hidden" alt="" />
-                        <div class="volume_control_container">
-                            <input type="range" class="volume_input" min="0" max="100" value="100" />
-                            <span class="volume_value">100%</span>
+                <div class="player-song__info">
+                    <div class="player-song__info__up">
+                        <span class="player-song__info__up-text" id="song_name"></span>
+                        <span class="player-song__info__up-text" id="song_author"></span>
+                        <div class="player-song__time-zone">
+                            <span class="player-song__info__up-text" id="song_time_counter">00:00</span> / 
+                            <span class="player-song__info__up-text" id="song_total-time">00:00</span>
                         </div>
                     </div>
+                    <div class="player-song__info__down">
+                        <input type="range" id="progress_bar" class="player-song__progress_bar" min="0" max="100" value="0" />
+                    </div>
                 </div>
-                
             </div>
 
-            <audio src=""></audio>
-        </div>
-    </div>
-
-    <div id="playlist" class="playlist">
-        <div class="playlist_table">
-            <div class="playlist_header">
-                <img id="close-playlist" src="./assets//icons/close-icon.svg" alt="" />
+            <div class="player-volume__container">
+                <div class="player-song__volume_value"><span id="volume-value"></span></div>
+                <input type="range" id="player-volume" class="player-volume" min="0" max="100" value="100" />
             </div>
 
-            <div class="list"></div>
+            <div class="player-nav_icons icons">
+                <div class="player-nav__random">
+                    <img src="./assets/icons/random.png" alt="" id="random" />
+                    <img src="./assets/icons/random-active.png" class="hidden" alt="" id="random-active" />
+                </div>
+                <div class="player-nav__repeat">
+                    <img src="./assets/icons/repeat.png" alt="" id="repeat" />
+                    <img src="./assets/icons/repeat-active.png" class="hidden" alt="" id="repeat-active" />
+                </div>
+            </div>
             
         </div>
+
+        <div id="waveform"></div>
+
+        <div class="playlist"></div>
+        <audio src=""></audio>
+
     </div>
     
     <script src="./js//index.js"></script>
