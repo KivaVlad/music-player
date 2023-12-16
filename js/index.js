@@ -38,6 +38,7 @@ const wavesurfer = WaveSurfer.create({
     waveColor: '#0079FF',
     progressColor: '#697C9A',
     hideScrollbar: true,
+    responsive: true,
     barWidth: 3,
     height: 70,
     media: player,
@@ -109,9 +110,13 @@ function init() {
             
         })
 
+        player.pause();
         isPlaying = true;
-        player.play();
-        loadSong(playlist[currentSongIndex]);
+        
+        setTimeout(() => {
+            player.play();
+            loadSong(playlist[currentSongIndex]);
+        }, 1000)
     }
 
 
@@ -143,9 +148,13 @@ function init() {
             if (btn.dataset?.set) btn.classList.add('hidden');
         })
 
+        player.pause();
         isPlaying = true;
-        player.play();
-        loadSong(playlist[currentSongIndex]);
+        
+        setTimeout(() => {
+            player.play();
+            loadSong(playlist[currentSongIndex]);
+        }, 1000)
     }
 
 
