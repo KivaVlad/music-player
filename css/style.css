@@ -296,6 +296,7 @@ body {
     flex-direction: column;
     gap: 6px;
     width: 100%;
+    margin-bottom: 10px;
     padding: 6px 0;
     border-radius: 10px;
     background-color: var(--gray-400);
@@ -348,11 +349,11 @@ body {
     .player-song__info {
         margin-top: 20px;
         min-width: 260px;
-        width: 100%;
     }
 
     .player {
         position: relative;
+        padding: 10px 8px;
     }
 
     .player-song__image {
@@ -366,11 +367,28 @@ body {
         gap: 8px;
     }
 
+    .player-nav_icons > img {
+        width: 30px;
+    }
+
     .icons {
         position: absolute;
         top: 12px;
         right: 20px;
         gap: 20px;
+    }
+
+    .player-nav__random img, .player-nav__repeat img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .player-song__info__up-text {
+        font-size: 14px;
+    }
+
+    .playlist-audio__container {
+        padding: 2px 8px;
     }
 }
 

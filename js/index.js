@@ -112,11 +112,9 @@ function init() {
 
         player.pause();
         isPlaying = true;
-        
-        setTimeout(() => {
-            player.play();
-            loadSong(playlist[currentSongIndex]);
-        }, 1000)
+        loadSong(playlist[currentSongIndex]);
+
+        setTimeout(() => player.play(), 800);
     }
 
 
@@ -150,11 +148,9 @@ function init() {
 
         player.pause();
         isPlaying = true;
-        
-        setTimeout(() => {
-            player.play();
-            loadSong(playlist[currentSongIndex]);
-        }, 1000)
+        loadSong(playlist[currentSongIndex]);
+
+        setTimeout(() => player.play(), 800);
     }
 
 
